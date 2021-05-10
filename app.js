@@ -37,6 +37,19 @@ app.put("/update/todo/:name", (req, res) => {
   res.json(todos);
 });
 
+app.delete("/delete/todo/:name", (req, res) => {
+  const deletedTodo = req.params.name;
+  let i;
+  const found = todos.find((element, index) => {
+    i = index;
+    return element.todo === deletedTodo;
+  });
+  if (found) {
+    todos.splice(i, 1);
+  }
+  res.json(todos);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
