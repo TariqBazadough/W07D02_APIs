@@ -50,6 +50,19 @@ app.delete("/delete/todo/:name", (req, res) => {
   res.json(todos);
 });
 
+app.put("/complete/todo/:name", (req, res) => {
+  const completed = req.params.name;
+  let i;
+  const found = todos.find((element, index) => {
+    i = index;
+    return element.todo === completed;
+  });
+  if (found) {
+    todos[i].isCompleted = true;
+  }
+  res.json(todos);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
